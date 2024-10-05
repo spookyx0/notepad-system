@@ -6,7 +6,7 @@
 
 <section class="ftco-section flex items-center justify-center min-h-screen">
     <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay for darkening the background -->
-    <div class="container relative z-10 flex justify-center items-center" style="height: 80vh; width: 90%; max-width: 800px;"> <!-- Responsive square container -->
+    <div class="container relative z-10 flex justify-center items-center" style="height: 86vh; width: 90%; max-width: 800px;"> <!-- Increased height to 85vh -->
         <div class="border border-gray-300 bg-white rounded-lg shadow-xl flex flex-col md:flex-row h-full w-full"> <!-- Outer box -->
             <div class="md:w-1/2 h-full flex items-center justify-center overflow-hidden"> <!-- Left side for the image -->
                 <img src="@Url.Content("~/img/loginbg.webp")" alt="Decorative Image" class="object-cover h-full w-full md:rounded-l-lg" style="max-height: 100%; max-width: 100%;"/> <!-- Responsive image -->
@@ -27,18 +27,20 @@
                     <div class="form-control mb-4">
                         <button type="submit" class="btn btn-primary w-full">Login</button>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-2"> <!-- Added margin to create space -->
                         <label class="label cursor-pointer">
                             <span class="label-text">Remember Me</span>
                             <input type="checkbox" checked class="checkbox checkbox-primary mx-2" />
                         </label>
-                        <a href="#" class="text-white">Forgot Password</a>
+                        <a href="#" class="text-base">Forgot Password?</a> <!-- Changed to text-base for better visibility -->
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+
 
 
 
