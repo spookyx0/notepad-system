@@ -1,0 +1,64 @@
+@model MyNotesApp.Models.UserModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<body class="img js-fullheight" style="background-image: url('@Url.Content("~/img/loginbg.jpg")'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Welcome to Notes, Login To Continue</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	
+		      	<form asp-action="Login" method="POST">
+		      	  <div class="form-group">
+		      			<input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
+						<span asp-validation-for="Email" class="text-danger"></span>
+		      	  </div>
+				  <div class="form-group">
+					<input id="password-field" asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+					<span asp-validation-for="Password" class="text-danger"></span>
+					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+				  </div>
+				  <div class="form-group">
+						<button type="submit" value="Login" class="form-control btn btn-primary submit px-3">Login</button>
+				  </div>
+				  
+				  <div class="form-group d-md-flex">
+					  <div class="w-50">
+						<label class="checkbox-wrap checkbox-primary">Remember Me
+						  <input type="checkbox" checked>
+						  <span class="checkmark"></span>
+						</label>
+					  </div>
+					  <div class="w-50 text-md-right">
+						  <a href="#" style="color: #fff">Forgot Password</a>
+					  </div>
+				  </div>
+	          </form>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $(".toggle-password").click(function () {
+                let input = $("#password-field");
+                let type = input.attr("type") === "password" ? "text" : "password";
+                input.attr("type", type);
+                
+                // Toggle the eye icon class
+                $(this).toggleClass("fa-eye fa-eye-slash");
+            });
+        });
+    </script>
+}

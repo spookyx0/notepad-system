@@ -13,6 +13,9 @@ x86/
 bin/
 obj/
 publish/
+*.db
+*.db-shm
+*.db-wal
 
 # Environment variables
 .env
