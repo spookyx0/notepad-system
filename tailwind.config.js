@@ -5,7 +5,10 @@ module.exports = {
       './wwwroot/**/*.html',
       './wwwroot/**/*.js',
   ],
-  theme: {
+  daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
+  theme: {  
       extend: {},
   },
   plugins: [
