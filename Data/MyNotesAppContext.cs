@@ -12,5 +12,6 @@ namespace MyNotesApp.Data;
         {
         }
 
-        public DbSet<MyNotesApp.Models.UserModel> UserModel { get; set; } = default!;
+        public DbSet<UserModel> UserModel { get; set; } = default!;
+        public DbSet<NoteModel> NoteModel { get; set; }
     }
