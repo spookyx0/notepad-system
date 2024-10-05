@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyNotesApp.Models;
 using MyNotesApp.Data;
+using Microsoft.AspNetCore.Authorization;
 namespace MyNotesApp.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly MyNotesAppContext _context;

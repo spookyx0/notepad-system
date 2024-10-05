@@ -1,47 +1,45 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MyNotesApp.Models;
-using MyNotesApp.Data;
-using Microsoft.AspNetCore.Authentication.Cookies; 
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using MyNotesApp.Models;
+    using MyNotesApp.Data;
+    using Microsoft.AspNetCore.Authentication.Cookies; 
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MyNotesAppContext>(options => 
-options.UseSqlite(builder.Configuration.GetConnectionString("MyNotesAppContext") ?? throw new InvalidOperationException("Connection string 'MyNotesAppContext' not found.")));
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddDbContext<MyNotesAppContext>(options => 
+    options.UseSqlite(builder.Configuration.GetConnectionString("MyNotesAppContext") ?? throw new InvalidOperationException("Connection string 'MyNotesAppContext' not found.")));
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+    builder.Services.AddControllersWithViews(); 
+
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(options =>
+        {
+            options.LoginPath = "/Account/Login";
+            options.LogoutPath = "/Account/Logout";
+        });
+    var app = builder.Build();
+
+    using (var scope = app.Services.CreateScope())
     {
-        options.LoginPath = "/Account/Login";
-        options.LogoutPath = "/Account/Logout";
-    });
+        var services = scope.ServiceProvider;
 
-builder.Services.AddControllersWithViews();
+        SeedData.Initialize(services);
+    }
+    // Configure the HTTP request pipeline.
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+    }
 
-var app = builder.Build();
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+    app.UseRouting();
+    app.UseAuthorization();
 
-    SeedData.Initialize(services);
-}
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
-
-app.Run();
+    app.Run();

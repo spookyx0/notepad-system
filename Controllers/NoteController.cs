@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyNotesApp.Data;
 using MyNotesApp.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MyNotesApp.Controllers
 {
+    [Authorize]
     public class NoteController : Controller
     {
         private readonly MyNotesAppContext _context;
@@ -18,7 +21,7 @@ namespace MyNotesApp.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Note
         public async Task<IActionResult> Index()
         {
