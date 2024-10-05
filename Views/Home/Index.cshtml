@@ -2,7 +2,35 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mx-auto mt-4 px-3">
+    <h1 class="text-center text-4xl mb-8">Meet Our Team</h1>
+
+    <div class="flex flex-col items-center space-y-4"> <!-- Center items vertically -->
+        <!-- Member 1 -->
+        <div class="card bg-base-100 shadow-lg border border-gray-300 flex flex-row items-center p-4 mx-2 w-full sm:w-96 md:w-2/3 lg:w-3/4 max-w-[900px]">
+            <img src="https://images5.alphacoders.com/110/thumb-1920-1102044.jpg" alt="Member 1" class="rounded-lg w-32 h-32 mr-4" />
+            <div class="flex-1">
+                <h2 class="card-title text-xl">John Doe</h2>
+                <p class="text-lg">Lead Developer</p>
+            </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="card bg-base-100 shadow-lg border border-gray-300 flex flex-row items-center p-4 mx-2 w-full sm:w-96 md:w-2/3 lg:w-3/4 max-w-[900px]">
+            <img src="https://www.gamewallpapers.com/img_script/mobile_dir2/img.php?src=wallpaper_valorant_04_1440pwide.jpg&height=450&width=506&crop-to-fit&sharpen" alt="Member 2" class="rounded-lg w-32 h-32 mr-4" />
+            <div class="flex-1">
+                <h2 class="card-title text-xl">Jane Smith</h2>
+                <p class="text-lg">UX Designer</p>
+            </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="card bg-base-100 shadow-lg border border-gray-300 flex flex-row items-center p-4 mx-2 w-full sm:w-96 md:w-2/3 lg:w-3/4 max-w-[900px]">
+            <img src="https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg" alt="Member 3" class="rounded-lg w-32 h-32 mr-4" />
+            <div class="flex-1">
+                <h2 class="card-title text-xl">Michael Lee</h2>
+                <p class="text-lg">Project Manager</p>
+            </div>
+        </div>
+    </div>
 </div>
