@@ -2,12 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MyNotesApp.Models;
 using MyNotesApp.Data;
+using Microsoft.AspNetCore.Authentication.Cookies; 
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MyNotesAppContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MyNotesAppContext") ?? throw new InvalidOperationException("Connection string 'MyNotesAppContext' not found.")));
+builder.Services.AddDbContext<MyNotesAppContext>(options => 
+options.UseSqlite(builder.Configuration.GetConnectionString("MyNotesAppContext") ?? throw new InvalidOperationException("Connection string 'MyNotesAppContext' not found.")));
 
-// Add services to the container.
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+    });
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -35,6 +42,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

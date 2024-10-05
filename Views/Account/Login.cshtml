@@ -1,4 +1,4 @@
-@model MyNotesApp.Models.UserModel
+@model MyNotesApp.Models.UserModel;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -17,16 +17,16 @@
 		      	
 		      	<form asp-action="Login" method="POST">
 		      	  <div class="form-group">
-		      			<input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
+		      			<input type="email" asp-for="Email" name="Email" class="form-control" placeholder="Email" required>
 						<span asp-validation-for="Email" class="text-danger"></span>
 		      	  </div>
 				  <div class="form-group">
-					<input id="password-field" asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+					<input id="password-field" asp-for="Password" name="Password" type="password" class="form-control" placeholder="Password" required>
 					<span asp-validation-for="Password" class="text-danger"></span>
 					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				  </div>
 				  <div class="form-group">
-						<button type="submit" value="Login" class="form-control btn btn-primary submit px-3">Login</button>
+						<button type="submit" class="form-control btn btn-primary submit px-3">Login</button>
 				  </div>
 				  
 				  <div class="form-group d-md-flex">
