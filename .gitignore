@@ -65,3 +65,55 @@ packages/
 
 # Published output
 publish/
+
+# ASP.NET
+bin/
+obj/
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Visual Studio
+.vs/
+.vscode/
+*.vscode/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Output from Tailwind CSS
+wwwroot/css/output.css
+
+# Build results
+wwwroot/css/site.css.map
+
+# Logs
+logs/
+*.log
+
+# IDE specific files
+*.idea/
+
+# User-specific files
+*.swp
+*.swo
+*.tmp
+*.tmp/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.orig
+
+# Miscellaneous
+.idea/
+*.tmp
+*.temp
