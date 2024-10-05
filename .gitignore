@@ -1,0 +1,64 @@
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.sln.ide
+.vscode/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+obj/
+publish/
+
+# Environment variables
+.env
+*.env
+
+# Secrets and configuration files
+appsettings.Development.json
+appsettings.*.json
+secrets.json
+*secrets*
+*key*
+*.cert
+*.pfx
+*.p12
+*.jks
+*.keystore
+
+# Visual Studio Code files
+.vscode/
+.history/
+*.code-workspace
+
+# Visual Studio files
+*.vs/
+.vs/
+
+# Rider files
+.idea/
+*.sln.iml
+
+# Log files
+*.log
+logs/
+
+# Backup files
+*.bak
+*.old
+*.tmp
+*.temp
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+**/packages/
+**/project.lock.json
+
+# Published output
+publish/
