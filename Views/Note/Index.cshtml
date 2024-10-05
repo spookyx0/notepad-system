@@ -1,50 +1,50 @@
 @model IEnumerable<MyNotesApp.Models.NoteModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Notes List";
 }
 
-<div style="height: 100vh;">
-<h1>Notes</h1>
+<h1 class="text-2xl font-bold mb-4">Notes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary mb-4">Create New Note</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NoteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NoteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NoteId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 
+<div class="overflow-x-auto rounded-lg border shadow-md bg-gray-800">
+    <table class="table w-full table-striped">
+        <thead class="bg-gray-700 text-gray-300">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Email)
+                </th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr class="hover:bg-blue-600 hover:text-gray-300 transition-colors duration-200">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                    <td class="flex justify-center space-x-2">
+                        <a asp-action="Edit" asp-route-id="@item.NoteId" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.NoteId" class="btn btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.NoteId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
