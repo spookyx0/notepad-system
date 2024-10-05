@@ -1,64 +1,61 @@
-@model MyNotesApp.Models.UserModel;
+@model MyNotesApp.Models.UserModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Login Page";
 }
 
-<body class="img js-fullheight" style="background-image: url('@Url.Content("~/img/loginbg.jpg")'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Welcome to Notes, Login To Continue</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	
-		      	<form asp-action="Login" method="POST">
-		      	  <div class="form-group">
-		      			<input type="email" asp-for="Email" name="Email" class="form-control" placeholder="Email" required>
-						<span asp-validation-for="Email" class="text-danger"></span>
-		      	  </div>
-				  <div class="form-group">
-					<input id="password-field" asp-for="Password" name="Password" type="password" class="form-control" placeholder="Password" required>
-					<span asp-validation-for="Password" class="text-danger"></span>
-					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-				  </div>
-				  <div class="form-group">
-						<button type="submit" class="form-control btn btn-primary submit px-3">Login</button>
-				  </div>
-				  
-				  <div class="form-group d-md-flex">
-					  <div class="w-50">
-						<label class="checkbox-wrap checkbox-primary">Remember Me
-						  <input type="checkbox" checked>
-						  <span class="checkmark"></span>
-						</label>
-					  </div>
-					  <div class="w-50 text-md-right">
-						  <a href="#" style="color: #fff">Forgot Password</a>
-					  </div>
-				  </div>
-	          </form>
-		      </div>
-				</div>
-			</div>
-		</div>
-	</section>
-</body>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        $(document).ready(function () {
-            $(".toggle-password").click(function () {
-                let input = $("#password-field");
-                let type = input.attr("type") === "password" ? "text" : "password";
-                input.attr("type", type);
-                
-                // Toggle the eye icon class
-                $(this).toggleClass("fa-eye fa-eye-slash");
+
+<section class="ftco-section flex items-center justify-center min-h-screen">
+    <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay for darkening the background -->
+    <div class="container relative z-10 flex justify-center items-center" style="height: 80vh; width: 90%; max-width: 800px;"> <!-- Responsive square container -->
+        <div class="border border-gray-300 bg-white rounded-lg shadow-xl flex flex-col md:flex-row h-full w-full"> <!-- Outer box -->
+            <div class="md:w-1/2 h-full flex items-center justify-center overflow-hidden"> <!-- Left side for the image -->
+                <img src="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6d6f239e-45e5-46f2-91a9-967bd017aa00/width=450/07161-270059744-jett,%20hair%20twirling,%20hair%20tucking,%20portrait,%201girl,%20solo,%20blue%20eyes,%20gloves,%20cityscape,%20night,%20detailed%20outdoor%20lighting,%20RAW%20ph.jpeg" alt="Decorative Image" class="object-cover h-full w-full md:rounded-l-lg" style="max-height: 100%; max-width: 100%;"/> <!-- Responsive image -->
+            </div>
+            <div class="md:w-1/2 h-full flex flex-col items-center justify-center bg-base-200 p-4 md:p-6 overflow-hidden"> <!-- Right side for the login form -->
+                <h2 class="text-center text-2xl font-semibold mb-4">Welcome Back!</h2> <!-- Welcoming message -->
+                <p class="text-center text-gray-600 mb-6">We're glad to see you again. Please log in to continue.</p> <!-- Friendly message -->
+                <form asp-action="Login" method="POST" class="flex flex-col w-full"> <!-- Removed card, now using full width -->
+                    <div class="form-control mb-4">
+                        <input type="email" asp-for="Email" name="Email" class="input input-bordered w-full" placeholder="Email" required />
+                        <span asp-validation-for="Email" class="text-red-500"></span>
+                    </div>
+                    <div class="form-control mb-4 relative"> <!-- Password input with eye icon -->
+                        <input id="password-field" asp-for="Password" name="Password" type="password" class="input input-bordered pr-10 w-full" placeholder="Password" required />
+                        <span asp-validation-for="Password" class="text-red-500"></span>
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"></span>
+                    </div>
+                    <div class="form-control mb-4">
+                        <button type="submit" class="btn btn-primary w-full">Login</button>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <label class="label cursor-pointer">
+                            <span class="label-text">Remember Me</span>
+                            <input type="checkbox" checked class="checkbox checkbox-primary" />
+                        </label>
+                        <a href="#" class="text-white">Forgot Password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            $(document).ready(function () {
+                $(".toggle-password").click(function () {
+                    let input = $("#password-field");
+                    let type = input.attr("type") === "password" ? "text" : "password";
+                    input.attr("type", type);
+
+                    // Toggle the eye icon class
+                    $(this).toggleClass("fa-eye fa-eye-slash");
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }
+
