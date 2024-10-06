@@ -65,7 +65,7 @@ namespace MyNotesApp.Controllers;
             else{
                 _logger.LogWarning("Model state is invalid for email: {Email}.", model.Email);
             }
-            return View(model);
+            return View();
         }
 
 
