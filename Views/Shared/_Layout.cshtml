@@ -190,6 +190,16 @@
 
 
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+  const themeDropdownDetails = document.getElementById('theme-dropdown-details');
+  function closeDetails(event) {
+    const isClickInside = themeDropdownDetails.contains(event.target);
+    if (!isClickInside) {
+      themeDropdownDetails.removeAttribute('open');
+    }
+  }
+  document.addEventListener('click', closeDetails);
+</script>
   <script src="~/js/site.js" asp-append-version="true"></script>
   @await RenderSectionAsync("Scripts", required: false)
 </body>
