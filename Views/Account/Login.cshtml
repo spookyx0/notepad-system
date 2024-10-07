@@ -4,17 +4,17 @@
 }
 
 
-<section class="ftco-section flex items-center justify-center min-h-screen">
-    <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay for darkening the background -->
-    <div class="container relative z-10 flex justify-center items-center" style="height: 86vh; width: 90%; max-width: 800px;"> <!-- Increased height to 85vh -->
-        <div class="border border-gray-300 bg-white rounded-lg shadow-xl flex flex-col md:flex-row h-full w-full"> <!-- Outer box -->
-            <div class="md:w-1/2 h-full flex items-center justify-center overflow-hidden"> <!-- Left side for the image -->
-                <img src="@Url.Content("~/img/loginbg.webp")" alt="Decorative Image" class="object-cover h-full w-full md:rounded-l-lg" style="max-height: 100%; max-width: 100%;"/> <!-- Responsive image -->
+<section class="ftco-section mt-5">
+    <div class="inset-0 bg-black opacity-50"></div> 
+    <div class="container relative z-10 flex justify-center items-center h-auto md:h-[86vh]"> <!-- 86vh on tablets/desktop, auto on mobile -->
+        <div class="border border-gray-300 bg-white rounded-lg shadow-xl flex flex-col md:flex-row h-auto md:h-full w-full max-w-xs md:max-w-2xl lg:max-w-4xl"> <!-- Outer box -->
+            <div class="w-full md:w-1/2 h-64 sm:h-72 md:h-full flex items-center justify-center overflow-hidden"> <!-- Left side for the image -->
+                <img src="@Url.Content("~/img/loginbg.webp")" alt="Decorative Image" class="object-cover w-full h-full md:rounded-l-lg" /> <!-- Responsive image -->
             </div>
-            <div class="md:w-1/2 h-full flex flex-col items-center justify-center bg-base-200 p-4 md:p-6 overflow-hidden"> <!-- Right side for the login form -->
+            <div class="w-full md:w-1/2 flex flex-col items-center justify-center bg-base-200 p-6 h-full"> <!-- Right side for the login form -->
                 <h2 class="text-center text-2xl font-semibold mb-4">Welcome Back!</h2> <!-- Welcoming message -->
                 <p class="text-center text-gray-600 mb-6">We're glad to see you again. Please log in to continue.</p> <!-- Friendly message -->
-                <form asp-action="Login" method="POST" class="flex flex-col w-full"> <!-- Removed card, now using full width -->
+                <form asp-action="Login" method="POST" class="flex flex-col w-full">
                     <div class="form-control mb-4">
                         <input type="email" asp-for="Email" name="Email" class="input input-bordered w-full" placeholder="Email" required />
                         <span asp-validation-for="Email" class="text-red-500"></span>
@@ -27,18 +27,20 @@
                     <div class="form-control mb-4">
                         <button type="submit" class="btn btn-primary w-full">Login</button>
                     </div>
-                    <div class="flex justify-between items-center mt-2"> <!-- Added margin to create space -->
+                    <div class="flex justify-between items-center mt-2">
                         <label class="label cursor-pointer">
                             <span class="label-text">Remember Me</span>
                             <input type="checkbox" checked class="checkbox checkbox-primary mx-2" />
                         </label>
-                        <a href="#" class="text-base">Forgot Password?</a> <!-- Changed to text-base for better visibility -->
+                        <a href="#" class="text-base">Forgot Password?</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+
 
 
 
