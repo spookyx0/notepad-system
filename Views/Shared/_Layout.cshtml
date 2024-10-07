@@ -37,7 +37,66 @@
         <ul class="menu menu-horizontal">
           <!-- Navbar menu content here -->
           <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-          <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+          
+         <li>
+            <details id="theme-dropdown-details">
+              <summary class="flex items-center cursor-pointer">
+                Theme
+              </summary>
+              <ul class="bg-base-300 rounded-b-box z-[1] w-52 p-2 shadow-2xl">
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Default"
+                    value="default" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Retro"
+                    value="retro" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Cyberpunk"
+                    value="cyberpunk" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Valentine"
+                    value="valentine" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Aqua"
+                    value="aqua" />
+                </li>
+                  <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Emerald"
+                    value="emerald" />
+                </li>
+              </ul>
+            </details>
+        </li>
+        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+          
           @if (User.Identity.IsAuthenticated)
           {
             <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
@@ -65,7 +124,56 @@
        <h2 class="text-lg font-semibold mb-4">Notes App</h2>
       <!-- Sidebar content here -->
       <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-      <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+      <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+       <li>
+            <details id="theme-dropdown-details">
+              <summary class="flex items-center cursor-pointer">
+                Theme
+              </summary>
+              <ul class="bg-base-300 rounded-b-box z-[1] w-52 p-2 shadow-2xl">
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Default"
+                    value="default" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Retro"
+                    value="retro" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Cyberpunk"
+                    value="cyberpunk" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Valentine"
+                    value="valentine" />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Aqua"
+                    value="aqua" />
+                </li>
+              </ul>
+            </details>
+          </li>
       @if (User.Identity.IsAuthenticated)
       {
         <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
