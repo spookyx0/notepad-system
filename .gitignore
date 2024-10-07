@@ -16,7 +16,7 @@ publish/
 *.db
 *.db-shm
 *.db-wal
-
+wwwroot/img/
 # Environment variables
 .env
 *.env
