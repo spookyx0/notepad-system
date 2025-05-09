@@ -27,10 +27,15 @@ A robust web application built with **ASP.NET MVC (C#)**, implementing core CRUD
 ## 📂 Project Structure
 
 /Controllers → MVC Controllers
+
 /Models → Entity models & ViewModels
+
 /Views → Razor views
+
 /Scripts → JavaScript files
+
 /Content → CSS, Bootstrap, static assets
+
 /App_Data → Local database files
 
 ## ⚙️ Getting Started
@@ -42,19 +47,17 @@ A robust web application built with **ASP.NET MVC (C#)**, implementing core CRUD
 - SQL Server or LocalDB installed
 
 🛡️ Security Notes
+
 Ensure you configure production-ready connection strings in web.config / appsettings.json
 
 Consider enabling HTTPS redirection and anti-forgery tokens in production
 
 🤝 Contributing
+
 Contributions are welcome! Please open an issue or submit a pull request for suggestions or improvements.
 
 📄 License
+
 This project is licensed under the MIT License – see the LICENSE file for details.
 
-✉️ Contact
-For questions or support, contact:
-
-Your Name
-kenkenlobos@yahoo.com
 [ Personal Portfolio](https://my-portfolio-sigma-murex-83.vercel.app/#home) | [GitHub](https://github.com/spookyx0)
