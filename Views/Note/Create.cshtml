@@ -4,48 +4,125 @@
     ViewData["Title"] = "Create Note";
 }
 
-<h1 class="text-3xl font-extrabold mb-4 text-center text-blue-400">Create Note</h1>
+<div class="relative text-center py-12 animate-fade-in">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight animate-slide-down">Create a New Note</h1>
+    <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg animate-fade-in delay-300">Fill out the form to add a new note.</p>
+</div>
 
-<h4 class="text-lg text-gray-300 text-center mb-6">Note Model</h4>
+<!-- Form Container -->
+<div class="flex justify-center px-4 md:px-0">
+    <div class="w-full max-w-2xl shadow-xl rounded-2xl p-10 animate-fade-in delay-500">
+        <form asp-action="Create" id="noteForm" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-error mb-2"></div>
 
-<div class="flex justify-center">
-    <div class="col-md-4 bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
-
-            <!-- Title Field -->
-            <div class="form-group mb-4">
-                <label asp-for="Title" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="Title" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+            <!-- Title -->
+            <div>
+                <label asp-for="Title" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                <input asp-for="Title" maxlength="100" class="input input-bordered w-full border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 transition duration-300" />
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><span id="titleCount">0</span>/100 characters</div>
+                <span asp-validation-for="Title" class="text-error text-sm"></span>
             </div>
 
-            <!-- Content Field -->
-            <div class="form-group mb-4">
-                <label asp-for="Content" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="Content" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="Content" class="text-danger"></span>
+            <!-- Content -->
+            <div>
+                <label asp-for="Content" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Content</label>
+                <textarea asp-for="Content" maxlength="500" rows="5" class="textarea textarea-bordered w-full border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 transition duration-300"></textarea>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-1"><span id="contentCount">0</span>/500 characters</div>
+                <span asp-validation-for="Content" class="text-error text-sm"></span>
             </div>
 
-            <!-- UserId Dropdown Field -->
-            <div class="form-group mb-4">
-                <label asp-for="UserId" class="control-label text-gray-200 font-medium mb-1">Select User</label>
-                <select asp-for="UserId" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
+            <!-- User Selection -->
+            <div>
+                <label asp-for="UserId" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Assign To User</label>
+                <select asp-for="UserId" class="select select-bordered w-full border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 transition duration-300" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-error text-sm"></span>
             </div>
 
             <!-- Submit Button -->
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary w-full mt-2 p-2 text-lg font-semibold rounded-md transition duration-150 ease-in-out hover:bg-blue-600" />
+            <div class="pt-4">
+                <button type="submit"
+                        id="submitButton"
+                        class="btn w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow hover:bg-indigo-500 hover:shadow-lg transition duration-300 transform hover:scale-105 active:scale-95 flex justify-center items-center space-x-2">
+                    <span id="btnText">Create Note</span>
+                    <svg id="btnSpinner" class="w-5 h-5 text-white animate-spin hidden" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                </button>
             </div>
         </form>
     </div>
 </div>
 
-<div class="mt-4 text-center">
-    <a asp-action="Index" class="text-blue-400 hover:underline hover:text-blue-500 transition duration-150 ease-in-out">Back to List</a>
+<!-- Back Link -->
+<div class="text-center mt-6 animate-fade-in delay-800">
+    <a asp-action="Index" class="text-indigo-600 hover:underline hover:text-indigo-500 transition duration-300">← Back to Notes List</a>
 </div>
+
+<!-- Toast Notification Modal -->
+@if (TempData["NoteCreated"] != null)
+{
+    <div id="toastModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white dark:bg-gray-900 rounded-lg p-8 shadow-lg w-full max-w-md">
+            <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Note Created Successfully!</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Your note has been successfully created.</p>
+            <div class="flex justify-center">
+                <a asp-action="Index" class="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-500 transition transform hover:scale-105 active:scale-95 text-center">
+                    Back to Notes List
+                </a>
+            </div>
+        </div>
+    </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        // Character counters
+        const titleInput = document.getElementById('Title');
+        const contentInput = document.getElementById('Content');
+        const titleCount = document.getElementById('titleCount');
+        const contentCount = document.getElementById('contentCount');
+
+        titleInput.addEventListener('input', () => { titleCount.textContent = titleInput.value.length; });
+        contentInput.addEventListener('input', () => { contentCount.textContent = contentInput.value.length; });
+
+        // Button loading spinner
+        document.getElementById('noteForm').addEventListener('submit', function () {
+            const btn = document.getElementById('submitButton');
+            const text = document.getElementById('btnText');
+            const spinner = document.getElementById('btnSpinner');
+
+            btn.disabled = true;
+            text.textContent = 'Saving...';
+            spinner.classList.remove('hidden');
+        });
+
+        // Toast auto-hide (Modal Notification)
+        const toastModal = document.getElementById('toastModal');
+        if (toastModal) {
+            toastModal.classList.remove('opacity-0', 'pointer-events-none');
+            toastModal.classList.add('opacity-100', 'pointer-events-auto');
+            setTimeout(() => {
+                toastModal.classList.add('opacity-0', 'pointer-events-none');
+                toastModal.classList.remove('opacity-100', 'pointer-events-auto');
+            }, 5000); // Hide modal after 5 seconds
+        }
+    </script>
 }
+
+<style>
+    @@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @@keyframes slide-down { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @@keyframes fade-in-slow { from { opacity: 0; } to { opacity: 1; } }
+
+    .animate-fade-in { animation: fade-in 1s ease forwards; }
+    .animate-slide-down { animation: slide-down 1s ease forwards; }
+    .animate-fade-in-slow { animation: fade-in-slow 1s ease forwards; }
+
+    #toastModal {
+        transition: all 0.3s ease-in-out;
+        z-index: 1000;
+    }
+</style>

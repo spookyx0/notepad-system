@@ -4,46 +4,101 @@
     ViewData["Title"] = "Edit Note";
 }
 
-<h1 class="text-3xl font-extrabold mb-4 text-center text-blue-400">Edit Note</h1>
+<!-- Page Title -->
+<div class="text-center py-10 animate__animated animate__fadeIn">
+    <h1 class="text-4xl font-extrabold text-blue-600">Edit Note</h1>
+    <p class="text-gray-400 text-lg mt-2">Update your note details below</p>
+</div>
 
-<h4 class="text-lg text-gray-300 text-center mb-6">Note Model</h4>
-
+<!-- Form Card with default background -->
 <div class="flex justify-center">
-    <div class="col-md-4 bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+    <div class="bg-gray-800 shadow-2xl rounded-2xl p-8 w-full max-w-lg animate__animated animate__fadeInUp animate__delay-1s text-gray-100">
+        <form id="editNoteForm" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-red-400 text-sm mb-4"></div>
             <input type="hidden" asp-for="NoteId" />
 
-            <!-- Improved styling for input fields -->
-            <div class="form-group mb-4">
-                <label asp-for="Title" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="Title" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+            <!-- Title -->
+            <div class="mb-6">
+                <label asp-for="Title" class="block font-semibold mb-2">Title</label>
+                <input asp-for="Title" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150" />
+                <span asp-validation-for="Title" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group mb-4">
-                <label asp-for="Content" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="Content" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="Content" class="text-danger"></span>
+            <!-- Content -->
+            <div class="mb-6">
+                <label asp-for="Content" class="block font-semibold mb-2">Content</label>
+                <textarea asp-for="Content" rows="4" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"></textarea>
+                <span asp-validation-for="Content" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group mb-4">
-                <label asp-for="UserId" class="control-label text-gray-200 font-medium mb-1"></label>
-                <select asp-for="UserId" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
+            <!-- User -->
+            <div class="mb-6">
+                <label asp-for="UserId" class="block font-semibold mb-2">Assigned User</label>
+                <select asp-for="UserId" asp-items="ViewBag.UserId" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"></select>
+                <span asp-validation-for="UserId" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary w-full mt-2 p-2 text-lg font-semibold rounded-md transition duration-150 ease-in-out hover:bg-blue-600" />
+            <!-- Submit Button triggers modal -->
+            <div class="mt-8">
+                <button type="button" id="openConfirmModal" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                    Save Changes
+                </button>
+            </div>
+
+            <!-- Progress bar -->
+            <div id="progressBarContainer" class="w-full bg-gray-600 rounded-full h-2 mt-4 hidden">
+                <div id="progressBar" class="bg-blue-500 h-2 rounded-full w-0 transition-all duration-500"></div>
             </div>
         </form>
     </div>
 </div>
 
-<div class="mt-4 text-center">
-    <a asp-action="Index" class="text-blue-400 hover:underline hover:text-blue-500 transition duration-150 ease-in-out">Back to List</a>
+<!-- Back to List -->
+<div class="text-center mt-6 animate__animated animate__fadeIn animate__delay-2s">
+    <a asp-action="Index" class="text-blue-400 hover:underline hover:text-blue-500 transition duration-150">← Back to List</a>
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirmModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+    <div class="bg-gray-800 text-white rounded-lg p-8 max-w-md w-full text-center shadow-xl">
+        <h2 class="text-2xl font-bold mb-4">Confirm Save</h2>
+        <p class="mb-6 text-gray-300">Are you sure you want to save the changes to this note?</p>
+        <div class="flex justify-center gap-4">
+            <button id="confirmSave" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold">Yes, Save</button>
+            <button id="cancelSave" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold">Cancel</button>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        const openModalBtn = document.getElementById('openConfirmModal');
+        const modal = document.getElementById('confirmModal');
+        const confirmBtn = document.getElementById('confirmSave');
+        const cancelBtn = document.getElementById('cancelSave');
+        const form = document.getElementById('editNoteForm');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressBarContainer');
+
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        confirmBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            progressContainer.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            setTimeout(() => progressBar.style.width = '100%', 50);
+            setTimeout(() => form.submit(), 800); // simulate short loading
+        });
+    </script>
 }
+
+<!-- Optional: Animate.css for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>

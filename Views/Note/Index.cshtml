@@ -4,47 +4,54 @@
     ViewData["Title"] = "Notes List";
 }
 
-<h1 class="text-2xl font-bold mb-4">Notes</h1>
+<div class="container mx-auto px-4 py-8">
+    <!-- Page Header -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">📒 My Notes</h1>
+        <a asp-action="Create" class="btn btn-primary">+ New Note</a>
+    </div>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary mb-4">Create New Note</a>
-</p>
+    <!-- Notes Grid -->
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        @foreach (var item in Model)
+        {
+            <div class="relative group">
+                <!-- Pin Icon (Heroicons push-pin) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 w-6 h-6 text-yellow-400 transition-transform duration-500 group-hover:rotate-12 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M8.707 1.293a1 1 0 0 0-1.414 0l-1 1A1 1 0 0 0 6 3v4H5a2 2 0 0 0-2 2v2h2.586l1 1H3v2h2.586l5 5a1 1 0 0 0 1.414-1.414l-5-5V9h2.586l1 1V3a1 1 0 0 0-.293-.707l-1-1z"/>
+                </svg>
 
-<div class="overflow-x-auto rounded-lg border shadow-md bg-gray-800">
-    <table class="table w-full table-striped">
-        <thead class="bg-gray-700 text-gray-300">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.Email)
-                </th>
-                <th class="text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
-                <tr class="hover:bg-blue-600 hover:text-gray-300 transition-colors duration-200">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Content)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Email)
-                    </td>
-                    <td class="flex justify-center space-x-2">
-                        <a asp-action="Edit" asp-route-id="@item.NoteId" class="btn btn-sm btn-primary">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.NoteId" class="btn btn-sm">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.NoteId" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                <!-- Card -->
+                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 hover:scale-105">
+                    <div class="card-body">
+                        <h2 class="card-title truncate">@item.Title</h2>
+                        <p class="text-sm text-gray-400 line-clamp-3">@item.Content</p>
+                        <p class="text-xs text-gray-500 mt-2">Created by: <span class="font-semibold">@item.User.Email</span></p>
+
+                        <div class="mt-4 flex justify-between">
+                            <a asp-action="Details" asp-route-id="@item.NoteId" class="btn btn-sm btn-outline">Details</a>
+                            <a asp-action="Edit" asp-route-id="@item.NoteId" class="btn btn-sm btn-info">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.NoteId" class="btn btn-sm btn-error">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center text-gray-500 mt-12">
+            <p>No notes found. Start by creating one!</p>
+        </div>
+    }
+
+    <!-- Pagination Controls -->
+    <div class="mt-8 flex justify-center space-x-2">
+        <button class="btn btn-sm btn-outline">Previous</button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-outline">2</button>
+        <button class="btn btn-sm btn-outline">3</button>
+        <button class="btn btn-sm btn-outline">Next</button>
+    </div>
 </div>

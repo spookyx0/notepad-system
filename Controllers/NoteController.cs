@@ -66,7 +66,8 @@ namespace MyNotesApp.Controllers
             {
                 _context.Add(noteModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["NoteCreated"] = true;
+                return RedirectToAction(nameof(Create));
             }
             ViewData["UserId"] = new SelectList(_context.UserModel, "UserId", "Email", noteModel.UserId);
             return View(noteModel);

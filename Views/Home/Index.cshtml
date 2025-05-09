@@ -2,35 +2,81 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container mx-auto mt-4 px-3">
-    <h1 class="text-center text-4xl mb-8">Meet Our Team</h1>
+<!-- Load Framer Motion (CDN) -->
+<script src="https://unpkg.com/framer-motion@10.16.5/dist/framer-motion.umd.js"></script>
 
-    <div class="flex flex-col items-center space-y-4"> <!-- Center items vertically -->
-        <!-- Member 1 -->
-        <div class="card bg-base-100 shadow-lg border border-gray-300 flex flex-row items-center p-4 mx-2 w-full sm:w-96 md:w-2/3 lg:w-3/4 max-w-[900px]">
-            <img src="https://images5.alphacoders.com/110/thumb-1920-1102044.jpg" alt="Member 1" class="rounded-lg w-32 h-32 mr-4" />
-            <div class="flex-1">
-                <h2 class="card-title text-xl">John Doe</h2>
-                <p class="text-lg">Lead Developer</p>
-            </div>
+<!-- FontAwesome (CDN for icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<div class="container mx-auto px-4 py-10">
+    <!-- Hero Section -->
+    <div id="hero" class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4 text-blue-600">Welcome to Notepad System</h1>
+        <p class="text-lg max-w-2xl mx-auto text-gray-300">
+            Manage your notes and users with ease. Our system offers a powerful, user-friendly platform for creating, organizing, and customizing your notes—all with a personalized theme experience.
+        </p>
+        <a href="/Note/Index" class="btn btn-primary mt-6 px-6 py-3 rounded-lg bg-blue-500 text-white font-semibold transition-transform transform hover:scale-105 hover:bg-blue-600 shadow-md">
+            Start Managing Notes
+        </a>
+    </div>
+
+    <!-- Features Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature Cards -->
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+            <i class="fa fa-plus-square text-4xl text-blue-500 mb-4"></i>
+            <h2 class="card-title text-lg font-semibold">Add & Edit Notes</h2>
+            <p class="text-gray-400 text-sm">Easily create new notes and edit existing ones to keep your content up to date and organized.</p>
         </div>
 
-        <!-- Member 2 -->
-        <div class="card bg-base-100 shadow-lg border border-gray-300 flex flex-row items-center p-4 mx-2 w-full sm:w-96 md:w-2/3 lg:w-3/4 max-w-[900px]">
-            <img src="https://www.gamewallpapers.com/img_script/mobile_dir2/img.php?src=wallpaper_valorant_04_1440pwide.jpg&height=450&width=506&crop-to-fit&sharpen" alt="Member 2" class="rounded-lg w-32 h-32 mr-4" />
-            <div class="flex-1">
-                <h2 class="card-title text-xl">Jane Smith</h2>
-                <p class="text-lg">UX Designer</p>
-            </div>
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+            <i class="fa fa-file-text text-4xl text-blue-500 mb-4"></i>
+            <h2 class="card-title text-lg font-semibold">View Note Details</h2>
+            <p class="text-gray-400 text-sm">Access the full details of each note with a simple click, providing a clear overview of your content.</p>
         </div>
 
-        <!-- Member 3 -->
-        <div class="card bg-base-100 shadow-lg border border-gray-300 flex flex-row items-center p-4 mx-2 w-full sm:w-96 md:w-2/3 lg:w-3/4 max-w-[900px]">
-            <img src="https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg" alt="Member 3" class="rounded-lg w-32 h-32 mr-4" />
-            <div class="flex-1">
-                <h2 class="card-title text-xl">Michael Lee</h2>
-                <p class="text-lg">Project Manager</p>
-            </div>
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+            <i class="fa fa-trash text-4xl text-blue-500 mb-4"></i>
+            <h2 class="card-title text-lg font-semibold">Delete Notes</h2>
+            <p class="text-gray-400 text-sm">Remove unwanted notes quickly and easily to keep your workspace clutter-free.</p>
+        </div>
+
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+            <i class="fa fa-users text-4xl text-blue-500 mb-4"></i>
+            <h2 class="card-title text-lg font-semibold">User Management</h2>
+            <p class="text-gray-400 text-sm">View a list of users, edit user details, see full user profiles, and manage user accounts efficiently.</p>
+        </div>
+
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+            <i class="fa fa-paint-brush text-4xl text-blue-500 mb-4"></i>
+            <h2 class="card-title text-lg font-semibold">Change Theme</h2>
+            <p class="text-gray-400 text-sm">Switch between multiple themes to personalize the entire Notepad System interface to your liking.</p>
+        </div>
+
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+            <i class="fa fa-cogs text-4xl text-blue-500 mb-4"></i>
+            <h2 class="card-title text-lg font-semibold">Customize Note Settings</h2>
+            <p class="text-gray-400 text-sm">Adjust individual note settings to suit your preferences, including visibility, formatting, and more.</p>
         </div>
     </div>
 </div>
+
+<!-- Framer Motion animations -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const { animate } = window["framer-motion"];
+
+        // Animate hero
+        animate("#hero", { opacity: [0, 1], y: [-50, 0] }, { duration: 1 });
+
+        // Animate each card with stagger
+        const cards = document.querySelectorAll(".motion-card");
+        cards.forEach((card, index) => {
+            animate(card, { opacity: [0, 1], scale: [0.8, 1] }, {
+                delay: 0.3 + index * 0.1,
+                duration: 0.8,
+                ease: "easeOut"
+            });
+        });
+    });
+</script>

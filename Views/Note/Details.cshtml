@@ -4,41 +4,131 @@
     ViewData["Title"] = "Note Details";
 }
 
-<h1 class="text-3xl font-extrabold mb-4 text-center text-blue-400">Note Details</h1>
+<!-- Page Title with Animation -->
+<div class="text-center py-12">
+    <h1 class="text-4xl font-extrabold text-blue-600 animate__animated animate__fadeIn">Note Details</h1>
+    <p class="text-gray-500 text-lg mt-2 animate__animated animate__fadeIn animate__delay-1s">View the details of the selected note.</p>
+</div>
 
-<div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-2xl mx-auto text-gray-300">
-    <h4 class="text-lg text-gray-400 mb-6">Note Information</h4>
-    <hr class="mb-4 border-gray-600" />
+<!-- Note Information Container with Default Background and White Text -->
+<div class="max-w-4xl mx-auto p-8 rounded-lg shadow-xl text-white animate__animated animate__fadeIn animate__delay-2s">
+    <h3 class="text-2xl font-semibold text-gray-200 mb-6">Note Information</h3>
+
+    <div class="space-y-6">
+        <!-- Title -->
+        <div class="flex justify-between">
+            <span class="font-semibold text-gray-300">Title:</span>
+            <span class="text-lg text-white">@Html.DisplayFor(model => model.Title)</span>
+        </div>
+        
+        <!-- Content -->
+        <div class="flex justify-between">
+            <span class="font-semibold text-gray-300">Content:</span>
+            <p class="text-lg text-white">@Html.DisplayFor(model => model.Content)</p>
+        </div>
+
+        <!-- User Email -->
+        <div class="flex justify-between">
+            <span class="font-semibold text-gray-300">Assigned User:</span>
+            <span class="text-lg text-white">@Html.DisplayFor(model => model.User.Email)</span>
+        </div>
+    </div>
+</div>
+
+<!-- Action Buttons with Enhanced Design and Animation -->
+<div class="mt-8 text-center animate__animated animate__fadeIn animate__delay-3s">
+    <button id="editButton" class="btn bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-500 transition duration-300 mx-2 text-lg font-semibold">
+        Edit
+    </button>
+    <a asp-action="Index" class="btn bg-gray-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-500 transition duration-300 mx-2 text-lg font-semibold">
+        Back to List
+    </a>
+</div>
+
+<!-- Modal for Confirmation with Improved Design -->
+<div id="confirmationModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full space-y-4 opacity-100 pointer-events-auto">
+        <h3 class="text-xl font-semibold text-gray-700">Are you sure you want to edit this note?</h3>
+        <div class="flex justify-center space-x-4 mt-4">
+            <button id="cancelEdit" class="btn bg-gray-400 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition duration-300">Cancel</button>
+            <a id="confirmEdit" asp-action="Edit" asp-route-id="@Model?.NoteId" class="btn bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Yes, Edit</a>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts for Modal and Framer Motion Animations -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdn.jsdelivr.net/npm/animate.css"></script>
     
-    <dl class="row">
-        <!-- Title Field -->
-        <dt class="col-sm-4 font-semibold text-gray-400">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-sm-8 text-lg">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+    <script>
+        // Modal logic
+        const editButton = document.getElementById('editButton');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const cancelEditButton = document.getElementById('cancelEdit');
+        const confirmEditButton = document.getElementById('confirmEdit');
+        
+        // Show modal on edit button click
+        editButton.addEventListener('click', () => {
+            confirmationModal.classList.remove('opacity-0', 'pointer-events-none');
+            confirmationModal.classList.add('opacity-100', 'pointer-events-auto');
+        });
+        
+        // Hide modal if "Cancel" is clicked
+        cancelEditButton.addEventListener('click', () => {
+            confirmationModal.classList.remove('opacity-100', 'pointer-events-auto');
+            confirmationModal.classList.add('opacity-0', 'pointer-events-none');
+        });
+        
+        // Modal confirmation for "Yes, Edit"
+        confirmEditButton.addEventListener('click', () => {
+            window.location.href = confirmEditButton.href; // Redirect to Edit page
+        });
+    </script>
+}
 
-        <!-- Content Field -->
-        <dt class="col-sm-4 font-semibold text-gray-400">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class="col-sm-8 text-lg">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+<!-- Custom Styles for the Modal and Buttons -->
+<style>
+    /* Modal Styles */
+    #confirmationModal {
+        transition: opacity 0.3s ease, pointer-events 0s ease 0.3s;
+    }
 
-        <!-- User Email Field -->
-        <dt class="col-sm-4 font-semibold text-gray-400">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class="col-sm-8 text-lg">
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-    </dl>
-</div>
+    /* Button Styles */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-<!-- Action Buttons -->
-<div class="mt-6 text-center">
-    <a asp-action="Edit" asp-route-id="@Model?.NoteId" class="btn btn-primary mx-2 text-lg font-semibold">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary mx-2 text-lg font-semibold">Back to List</a>
-</div>
+    /* Animations */
+    .animate__animated {
+        animation-duration: 1s;
+    }
+
+    .animate__delay-1s {
+        animation-delay: 1s;
+    }
+
+    .animate__delay-2s {
+        animation-delay: 2s;
+    }
+
+    .animate__delay-3s {
+        animation-delay: 3s;
+    }
+
+    /* Button Hover Effects */
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+        box-shadow: none;
+    }
+</style>
