@@ -55,15 +55,16 @@ namespace MyNotesApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,FirstName,LastName,Email,Password")] UserModel userModel)
+        public IActionResult Create(UserModel user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.Add(user); // if using EF Core
+                _context.SaveChanges();
+                return Ok(); // important: return 200 OK for AJAX
             }
-            return View(userModel);
+
+            return BadRequest(ModelState); // in case of validation errors
         }
 
         // GET: User/Edit/5
