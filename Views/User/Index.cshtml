@@ -6,7 +6,7 @@
 
 <div class="container mx-auto px-4 py-8">
     <!-- Page Header -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex justify-between items-center mb-6 animate-fadeIn">
         <h1 class="text-3xl font-bold">👤 Registered Users</h1>
         <a asp-action="Create" class="btn btn-primary">+ New User</a>
     </div>
@@ -17,7 +17,7 @@
         {
             <div class="relative group">
                 <!-- Card -->
-                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 hover:scale-105">
+                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 hover:scale-105 animate-slideInUp">
                     <div class="card-body">
                         <h2 class="card-title truncate">@item.FirstName @item.LastName</h2>
                         <p class="text-sm text-gray-400">@item.Email</p>
@@ -42,11 +42,29 @@
     }
 
     <!-- Pagination Controls -->
-    <div class="mt-8 flex justify-center space-x-2">
+    <div class="mt-8 flex justify-center space-x-2 animate-fadeIn">
         <button class="btn btn-sm btn-outline">Previous</button>
         <button class="btn btn-sm btn-primary">1</button>
         <button class="btn btn-sm btn-outline">2</button>
         <button class="btn btn-sm btn-outline">3</button>
         <button class="btn btn-sm btn-outline">Next</button>
     </div>
+
+    <style>
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @@keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideInUp {
+            animation: slideInUp 1s ease forwards;
+        }
+    </style>
 </div>
