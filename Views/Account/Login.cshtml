@@ -3,41 +3,54 @@
     ViewData["Title"] = "Login Page";
 }
 
-<section class="ftco-section min-h-screen flex items-center justify-center"> <!-- Dark background for full-height -->
-    <div class="container max-w-6xl w-full px-6 py-8 flex items-center justify-center relative"> <!-- Large container to hold the image and form -->
-        <div class="flex w-full max-w-4xl mx-auto bg-gradient-to-r from-indigo-700 via-purple-800 to-indigo-900 rounded-lg shadow-2xl z-10"> <!-- Main card with gradient and shadow -->
+<section class="ftco-section min-h-screen flex items-center justify-center animate-fadeInPage"> <!-- Added entry animation -->
+    <div class="container max-w-6xl w-full px-6 py-8 flex items-center justify-center relative">
+        <div class="flex w-full max-w-4xl mx-auto bg-gradient-to-r from-indigo-700 via-purple-800 to-indigo-900 rounded-lg shadow-2xl z-10 transform animate-slideInUp"> <!-- Added entry animation -->
             <!-- Left Side: Image -->
             <div class="hidden lg:block w-1/2 relative rounded-l-lg overflow-hidden">
-                <img src="@Url.Content("~/img/notepadbg.png")" alt="Decorative Image" class="w-full h-full object-cover"> <!-- Image on the left -->
-                <div class="absolute inset-0 bg-black opacity-30"></div> <!-- Dark overlay to make the content on top stand out -->
+                <img src="@Url.Content("~/img/notepadbg.png")" alt="Decorative Image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black opacity-30"></div>
             </div>
 
             <!-- Right Side: Form -->
             <div class="w-full lg:w-1/2 p-8 flex flex-col justify-center text-white bg-transparent">
                 <div class="text-center mb-6">
-                    <img src="@Url.Content("~/img/ueplogo.png")" alt="Logo" class="mx-auto w-32 h-32 mb-4"> <!-- Logo -->
+                    <img src="@Url.Content("~/img/ueplogo.png")" alt="Logo" class="mx-auto w-32 h-32 mb-4 animate-bounce"> <!-- Added animation -->
                     <h2 class="text-3xl font-semibold mb-2">Welcome Back!</h2>
                     <p class="text-lg">Please log in to continue.</p>
                 </div>
 
                 <!-- Login Form -->
-                <form asp-action="Login" method="POST" class="space-y-6">
+                <form id="loginForm" asp-action="Login" method="POST" class="space-y-6">
                     <!-- Email Input -->
                     <div class="form-control">
-                        <input type="email" asp-for="Email" name="Email" class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-transparent text-white placeholder-white" placeholder="Email" required />
+                        <input type="email" asp-for="Email" name="Email"
+                               class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-transparent text-white placeholder-white hover:ring-2 hover:ring-indigo-400 transition"
+                               placeholder="Email" required />
                         <span asp-validation-for="Email" class="text-red-500"></span>
                     </div>
 
                     <!-- Password Input with Eye Toggle -->
                     <div class="form-control relative">
-                        <input id="password-field" asp-for="Password" name="Password" type="password" class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-transparent text-white placeholder-white" placeholder="Password" required />
+                        <input id="password-field" asp-for="Password" name="Password" type="password"
+                               class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-transparent text-white placeholder-white hover:ring-2 hover:ring-indigo-400 transition"
+                               placeholder="Password" required />
                         <span asp-validation-for="Password" class="text-red-500"></span>
                         <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-white"></span>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div class="form-control">
-                        <button type="submit" class="w-full p-4 bg-indigo-600 rounded-lg text-white font-semibold hover:bg-indigo-700 focus:outline-none transition duration-300 ease-in-out">Login</button>
+                    <!-- Submit Button with Spinner -->
+                    <div class="form-control relative">
+                        <button type="submit" id="loginBtn"
+                                class="w-full p-4 bg-indigo-600 rounded-lg text-white font-semibold hover:bg-indigo-700 focus:outline-none transition duration-300 ease-in-out flex items-center justify-center gap-2">
+                            <span id="loginBtnText">Login</span>
+                            <svg id="loginSpinner" class="hidden animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                            </svg>
+                        </button>
                     </div>
 
                     <!-- Remember Me & Forgot Password -->
@@ -54,6 +67,16 @@
     </div>
 </section>
 
+<!-- Modal Notification -->
+<div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-gray-800 text-center text-gray-200 rounded-lg p-8 shadow-2xl w-96 animate-fadeIn">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">Login Successful!</h2>
+        <p class="text-gray-400 mb-6">Redirecting to dashboard...</p>
+        <button id="closeModalBtn"
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition">OK</button>
+    </div>
+</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
@@ -62,9 +85,70 @@
                 let input = $("#password-field");
                 let type = input.attr("type") === "password" ? "text" : "password";
                 input.attr("type", type);
-                // Toggle the eye icon class
                 $(this).toggleClass("fa-eye fa-eye-slash");
+            });
+
+            const loginForm = document.getElementById("loginForm");
+            const loginBtn = document.getElementById("loginBtn");
+            const loginBtnText = document.getElementById("loginBtnText");
+            const loginSpinner = document.getElementById("loginSpinner");
+            const successModal = document.getElementById("successModal");
+            const closeModalBtn = document.getElementById("closeModalBtn");
+
+            loginForm.addEventListener("submit", function (e) {
+                // Show spinner
+                loginSpinner.classList.remove("hidden");
+                loginBtnText.textContent = "Logging in...";
+
+                // Simulate server validation (replace with actual server call in real app)
+                setTimeout(() => {
+                    loginSpinner.classList.add("hidden");
+                    loginBtnText.textContent = "Login";
+                    successModal.classList.remove("hidden");
+                }, 2500); // simulate delay
+            });
+
+            closeModalBtn.addEventListener("click", () => {
+                window.location.href = '@Url.Action("Index", "Home")';
+            });
+
+            // Auto-redirect after modal pops up
+            successModal.addEventListener("transitionend", () => {
+                setTimeout(() => {
+                    window.location.href = '@Url.Action("Index", "Home")';
+                }, 2000);
             });
         });
     </script>
+
+    <style>
+        @@keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeInPage {
+            animation: fadeInPage 1s ease forwards;
+        }
+
+        @@keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideInUp {
+            animation: slideInUp 1s ease forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeInPage 0.5s ease forwards;
+        }
+
+        button:hover, input:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .checkbox:checked + span {
+            color: #c3b5ff;
+        }
+    </style>
 }
