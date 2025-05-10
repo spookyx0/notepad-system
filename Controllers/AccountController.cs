@@ -17,7 +17,7 @@ namespace MyNotesApp.Controllers;
         public AccountController(MyNotesAppContext context, ILogger<AccountController> logger)
         {
             _context = context;
-            _logger = logger; // Assign the logger
+            _logger = logger;
         }
 
         [HttpGet]
