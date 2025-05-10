@@ -10,7 +10,7 @@
 
 <div class="container mx-auto px-4 py-10">
     <!-- Hero Section -->
-    <div id="hero" class="text-center mb-12">
+    <div id="hero" class="text-center mb-12 animate-slideInUp">
         <h1 class="text-4xl font-bold mb-4 text-blue-600">Welcome to Notepad System</h1>
         <p class="text-lg max-w-2xl mx-auto text-gray-300">
             Manage your notes and users with ease. Our system offers a powerful, user-friendly platform for creating, organizing, and customizing your notes—all with a personalized theme experience.
@@ -23,37 +23,37 @@
     <!-- Features Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Feature Cards -->
-        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInLeft">
             <i class="fa fa-plus-square text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">Add & Edit Notes</h2>
             <p class="text-gray-400 text-sm">Easily create new notes and edit existing ones to keep your content up to date and organized.</p>
         </div>
 
-        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInDown">
             <i class="fa fa-file-text text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">View Note Details</h2>
             <p class="text-gray-400 text-sm">Access the full details of each note with a simple click, providing a clear overview of your content.</p>
         </div>
 
-        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInRight">
             <i class="fa fa-trash text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">Delete Notes</h2>
             <p class="text-gray-400 text-sm">Remove unwanted notes quickly and easily to keep your workspace clutter-free.</p>
         </div>
 
-        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInLeft">
             <i class="fa fa-users text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">User Management</h2>
             <p class="text-gray-400 text-sm">View a list of users, edit user details, see full user profiles, and manage user accounts efficiently.</p>
         </div>
 
-        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInUp">
             <i class="fa fa-paint-brush text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">Change Theme</h2>
             <p class="text-gray-400 text-sm">Switch between multiple themes to personalize the entire Notepad System interface to your liking.</p>
         </div>
 
-        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer">
+        <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInRight">
             <i class="fa fa-cogs text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">Customize Note Settings</h2>
             <p class="text-gray-400 text-sm">Adjust individual note settings to suit your preferences, including visibility, formatting, and more.</p>
@@ -80,3 +80,41 @@
         });
     });
 </script>
+<style>
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    @@keyframes slideInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slideInUp {
+        animation: slideInUp 1s ease forwards;
+    }
+    @@keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-40px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    .animate-slideInLeft {
+        animation: slideInLeft 0.5s ease forwards;
+    }
+    @@keyframes slideInRight {
+        from { opacity: 0; transform: translateX(40px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    .animate-slideInRight {
+        animation: slideInRight 0.5s ease forwards;
+    }
+    @@keyframes slideInDown {
+        from { opacity: 0; transform: translateY(-40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slideInDown {
+        animation: slideInDown 0.5s ease forwards;
+    }   
+</style>
