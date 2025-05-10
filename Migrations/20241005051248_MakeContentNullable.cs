@@ -4,10 +4,8 @@
 
 namespace MyNotesApp.Migrations
 {
-    /// <inheritdoc />
     public partial class MakeContentNullable : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -37,7 +35,6 @@ namespace MyNotesApp.Migrations
                 column: "UserId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

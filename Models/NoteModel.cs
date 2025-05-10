@@ -11,4 +11,4 @@ public class NoteModel{
      
     [ForeignKey("UserId")]
     public UserModel? User { get; set; } 
-}
+} 

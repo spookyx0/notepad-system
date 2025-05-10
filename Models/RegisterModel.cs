@@ -28,4 +28,4 @@ namespace MyNotesApp.Models
 
         public List<NoteModel>? Notes { get; set; }
     }
-}
+} 

@@ -2,14 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!-- Load Framer Motion (CDN) -->
 <script src="https://unpkg.com/framer-motion@10.16.5/dist/framer-motion.umd.js"></script>
-
-<!-- FontAwesome (CDN for icons) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 <div class="container mx-auto px-4 py-10">
-    <!-- Hero Section -->
     <div id="hero" class="text-center mb-12 animate-slideInUp">
         <h1 class="text-4xl font-bold mb-4 text-blue-600">Welcome to Notepad System</h1>
         <p class="text-lg max-w-2xl mx-auto text-gray-300">
@@ -19,10 +15,7 @@
             Start Managing Notes
         </a>
     </div>
-
-    <!-- Features Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Feature Cards -->
         <div class="motion-card card shadow-lg border rounded-xl p-6 text-center text-white transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 cursor-pointer animate-slideInLeft">
             <i class="fa fa-plus-square text-4xl text-blue-500 mb-4"></i>
             <h2 class="card-title text-lg font-semibold">Add & Edit Notes</h2>
@@ -61,15 +54,12 @@
     </div>
 </div>
 
-<!-- Framer Motion animations -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const { animate } = window["framer-motion"];
 
-        // Animate hero
         animate("#hero", { opacity: [0, 1], y: [-50, 0] }, { duration: 1 });
 
-        // Animate each card with stagger
         const cards = document.querySelectorAll(".motion-card");
         cards.forEach((card, index) => {
             animate(card, { opacity: [0, 1], scale: [0.8, 1] }, {

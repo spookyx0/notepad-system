@@ -9,13 +9,11 @@
     <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg animate-fade-in delay-300">Fill out the form to add a new note.</p>
 </div>
 
-<!-- Form Container -->
 <div class="flex justify-center px-4 md:px-0">
     <div class="w-full max-w-2xl shadow-xl rounded-2xl p-10 animate-fade-in delay-500">
         <form asp-action="Create" id="noteForm" class="space-y-6">
             <div asp-validation-summary="ModelOnly" class="text-error mb-2"></div>
 
-            <!-- Title -->
             <div>
                 <label asp-for="Title" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Title</label>
                 <input asp-for="Title" maxlength="100" class="input input-bordered w-full border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 transition duration-300" />
@@ -23,7 +21,6 @@
                 <span asp-validation-for="Title" class="text-error text-sm"></span>
             </div>
 
-            <!-- Content -->
             <div>
                 <label asp-for="Content" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Content</label>
                 <textarea asp-for="Content" maxlength="500" rows="5" class="textarea textarea-bordered w-full border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 transition duration-300"></textarea>
@@ -31,14 +28,12 @@
                 <span asp-validation-for="Content" class="text-error text-sm"></span>
             </div>
 
-            <!-- User Selection -->
             <div>
                 <label asp-for="UserId" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Assign To User</label>
                 <select asp-for="UserId" class="select select-bordered w-full border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 transition duration-300" asp-items="ViewBag.UserId"></select>
                 <span asp-validation-for="UserId" class="text-error text-sm"></span>
             </div>
 
-            <!-- Submit Button -->
             <div class="pt-4">
                 <button type="submit"
                         id="submitButton"
@@ -53,13 +48,10 @@
         </form>
     </div>
 </div>
-
-<!-- Back Link -->
 <div class="text-center mt-6 animate-fade-in delay-800">
     <a asp-action="Index" class="text-indigo-600 hover:underline hover:text-indigo-500 transition duration-300">← Back to Notes List</a>
 </div>
 
-<!-- Toast Notification Modal -->
 @if (TempData["NoteCreated"] != null)
 {
     <div id="toastModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
@@ -79,7 +71,6 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-        // Character counters
         const titleInput = document.getElementById('Title');
         const contentInput = document.getElementById('Content');
         const titleCount = document.getElementById('titleCount');
@@ -88,7 +79,6 @@
         titleInput.addEventListener('input', () => { titleCount.textContent = titleInput.value.length; });
         contentInput.addEventListener('input', () => { contentCount.textContent = contentInput.value.length; });
 
-        // Button loading spinner
         document.getElementById('noteForm').addEventListener('submit', function () {
             const btn = document.getElementById('submitButton');
             const text = document.getElementById('btnText');
@@ -99,7 +89,6 @@
             spinner.classList.remove('hidden');
         });
 
-        // Toast auto-hide (Modal Notification)
         const toastModal = document.getElementById('toastModal');
         if (toastModal) {
             toastModal.classList.remove('opacity-0', 'pointer-events-none');
@@ -107,7 +96,7 @@
             setTimeout(() => {
                 toastModal.classList.add('opacity-0', 'pointer-events-none');
                 toastModal.classList.remove('opacity-100', 'pointer-events-auto');
-            }, 5000); // Hide modal after 5 seconds
+            }, 5000);
         }
     </script>
 }

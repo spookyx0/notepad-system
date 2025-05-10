@@ -5,18 +5,15 @@
 }
 
 <div class="container mx-auto px-4 py-8">
-    <!-- Page Header -->
     <div class="flex justify-between items-center mb-6 animate-fadeIn">
         <h1 class="text-3xl font-bold">👤 Registered Users</h1>
         <a asp-action="Create" class="btn btn-primary">+ New User</a>
     </div>
 
-    <!-- Users Grid -->
     <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         @foreach (var item in Model)
         {
             <div class="relative group">
-                <!-- Card -->
                 <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 hover:scale-105 animate-slideInUp">
                     <div class="card-body">
                         <h2 class="card-title truncate">@item.FirstName @item.LastName</h2>
@@ -41,7 +38,6 @@
         </div>
     }
 
-    <!-- Pagination Controls -->
     <div class="mt-8 flex justify-center space-x-2 animate-fadeIn">
         <button class="btn btn-sm btn-outline">Previous</button>
         <button class="btn btn-sm btn-primary">1</button>

@@ -4,48 +4,35 @@
     ViewData["Title"] = "Edit Note";
 }
 
-<!-- Page Title -->
 <div class="text-center py-10 animate__animated animate__fadeIn">
     <h1 class="text-4xl font-extrabold text-blue-600">Edit Note</h1>
     <p class="text-gray-400 text-lg mt-2">Update your note details below</p>
 </div>
-
-<!-- Form Card with default background -->
 <div class="flex justify-center">
     <div class="bg-gray-800 shadow-2xl rounded-2xl p-8 w-full max-w-lg animate__animated animate__fadeInUp animate__delay-1s text-gray-100">
         <form id="editNoteForm" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-red-400 text-sm mb-4"></div>
             <input type="hidden" asp-for="NoteId" />
-
-            <!-- Title -->
             <div class="mb-6">
                 <label asp-for="Title" class="block font-semibold mb-2">Title</label>
                 <input asp-for="Title" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150" />
                 <span asp-validation-for="Title" class="text-red-400 text-sm"></span>
             </div>
-
-            <!-- Content -->
             <div class="mb-6">
                 <label asp-for="Content" class="block font-semibold mb-2">Content</label>
                 <textarea asp-for="Content" rows="4" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"></textarea>
                 <span asp-validation-for="Content" class="text-red-400 text-sm"></span>
             </div>
-
-            <!-- User -->
             <div class="mb-6">
                 <label asp-for="UserId" class="block font-semibold mb-2">Assigned User</label>
                 <select asp-for="UserId" asp-items="ViewBag.UserId" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"></select>
                 <span asp-validation-for="UserId" class="text-red-400 text-sm"></span>
             </div>
-
-            <!-- Submit Button triggers modal -->
             <div class="mt-8">
                 <button type="button" id="openConfirmModal" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
                     Save Changes
                 </button>
             </div>
-
-            <!-- Progress bar -->
             <div id="progressBarContainer" class="w-full bg-gray-600 rounded-full h-2 mt-4 hidden">
                 <div id="progressBar" class="bg-blue-500 h-2 rounded-full w-0 transition-all duration-500"></div>
             </div>
@@ -53,12 +40,10 @@
     </div>
 </div>
 
-<!-- Back to List -->
 <div class="text-center mt-6 animate__animated animate__fadeIn animate__delay-2s">
     <a asp-action="Index" class="text-blue-400 hover:underline hover:text-blue-500 transition duration-150">← Back to List</a>
 </div>
 
-<!-- Confirmation Modal -->
 <div id="confirmModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
     <div class="bg-gray-800 text-white rounded-lg p-8 max-w-md w-full text-center shadow-xl">
         <h2 class="text-2xl font-bold mb-4">Confirm Save</h2>
@@ -95,10 +80,8 @@
             progressContainer.classList.remove('hidden');
             progressBar.style.width = '0%';
             setTimeout(() => progressBar.style.width = '100%', 50);
-            setTimeout(() => form.submit(), 800); // simulate short loading
+            setTimeout(() => form.submit(), 800); 
         });
     </script>
 }
-
-<!-- Optional: Animate.css for animations -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>

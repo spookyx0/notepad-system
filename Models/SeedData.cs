@@ -14,10 +14,9 @@ public static class SeedData
             serviceProvider.GetRequiredService<
                 DbContextOptions<MyNotesAppContext>>()))
         {
-            // Look for any users.
             if (context.UserModel.Any())
             {
-                return;   // DB has been seeded
+                return;
             }
 
             context.UserModel.AddRange(
@@ -26,7 +25,7 @@ public static class SeedData
                     FirstName = "John",
                     LastName = "Doe",
                     Email = "john.doe@example.com",
-                    Password = "Password123" // Remember to hash passwords in a real application!
+                    Password = "Password123"
                 },
                 new UserModel
                 {

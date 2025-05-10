@@ -9,4 +9,4 @@ namespace MyNotesApp.Models
         [Required]
         public string Password { get; set; }
     }
-}
+} 

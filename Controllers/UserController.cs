@@ -20,13 +20,11 @@ namespace MyNotesApp.Controllers
             _context = context;
         }
 
-        // GET: User
         public async Task<IActionResult> Index()
         {
             return View(await _context.UserModel.ToListAsync());
         }
 
-        // GET: User/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,30 +42,25 @@ namespace MyNotesApp.Controllers
             return View(userModel);
         }
 
-        // GET: User/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: User/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(UserModel user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user); // if using EF Core
+                _context.Add(user);
                 _context.SaveChanges();
-                return Ok(); // important: return 200 OK for AJAX
+                return Ok();
             }
 
-            return BadRequest(ModelState); // in case of validation errors
+            return BadRequest(ModelState);
         }
 
-        // GET: User/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,9 +76,6 @@ namespace MyNotesApp.Controllers
             return View(userModel);
         }
 
-        // POST: User/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UserId,FirstName,LastName,Email,Password")] UserModel userModel)
@@ -117,8 +107,7 @@ namespace MyNotesApp.Controllers
             }
             return View(userModel);
         }
-
-        // GET: User/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +125,6 @@ namespace MyNotesApp.Controllers
             return View(userModel);
         }
 
-        // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

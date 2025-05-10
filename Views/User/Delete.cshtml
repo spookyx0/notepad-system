@@ -13,22 +13,18 @@
         <h4 class="text-lg text-gray-400 mb-4 font-semibold">User Information</h4>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-lg">
-            <!-- First Name -->
             <div>
                 <p class="text-sm text-gray-400 font-medium">@Html.DisplayNameFor(model => model.FirstName)</p>
                 <p class="font-semibold">@Html.DisplayFor(model => model.FirstName)</p>
             </div>
-            <!-- Last Name -->
             <div>
                 <p class="text-sm text-gray-400 font-medium">@Html.DisplayNameFor(model => model.LastName)</p>
                 <p class="font-semibold">@Html.DisplayFor(model => model.LastName)</p>
             </div>
-            <!-- Email -->
             <div>
                 <p class="text-sm text-gray-400 font-medium">@Html.DisplayNameFor(model => model.Email)</p>
                 <p class="font-semibold">@Html.DisplayFor(model => model.Email)</p>
             </div>
-            <!-- Password -->
             <div>
                 <p class="text-sm text-gray-400 font-medium">@Html.DisplayNameFor(model => model.Password)</p>
                 <p class="font-semibold">@Html.DisplayFor(model => model.Password)</p>
@@ -52,7 +48,6 @@
     </form>
 </div>
 
-<!-- Confirm Delete Modal -->
 <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
     <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-md w-full text-center animate-fadeIn">
         <h2 class="text-2xl font-bold text-red-400 mb-4">Confirm Delete</h2>
@@ -70,7 +65,6 @@
     </div>
 </div>
 
-<!-- Success Notification Modal -->
 <div id="successModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
     <div class="bg-green-700 text-white rounded-lg shadow-xl p-8 max-w-md w-full text-center animate-bounceIn">
         <h2 class="text-2xl font-bold mb-4">User Deleted Successfully</h2>
@@ -99,12 +93,10 @@
             confirmModal.classList.add('hidden');
             successModal.classList.remove('hidden');
 
-            // Submit form (simulate submit)
             setTimeout(() => {
                 deleteForm.submit();
             }, 1000);
 
-            // Redirect (client-side fallback)
             setTimeout(() => {
                 window.location.href = '@Url.Action("Index", "User")';
             }, 3000);
