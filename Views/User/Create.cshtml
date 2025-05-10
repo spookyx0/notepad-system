@@ -4,51 +4,147 @@
     ViewData["Title"] = "Create User";
 }
 
-<h1 class="text-3xl font-extrabold mb-4 text-center text-blue-400">Create User</h1>
-
-<h4 class="text-lg text-gray-300 text-center mb-6">User Model</h4>
+<h1 class="text-4xl font-extrabold mb-4 text-center text-blue-400 animate-fadeIn">Create New User</h1>
+<h4 class="text-lg text-gray-400 text-center mb-8">Fill out the form below to create a new user account</h4>
 
 <div class="flex justify-center">
-    <div class="col-md-4 bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+    <div class="bg-gray-900 bg-opacity-80 backdrop-blur-lg rounded-xl shadow-2xl max-w-lg w-full p-10 animate-slideInUp relative">
+        <form asp-action="Create" id="createUserForm" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-red-500 mb-4 text-sm"></div>
 
-            <!-- Improved styling for input fields -->
-            <div class="form-group mb-4">
-                <label asp-for="FirstName" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="FirstName" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+            <!-- First Name -->
+            <div class="mb-6">
+                <label asp-for="FirstName" class="block text-gray-300 font-semibold mb-2 uppercase tracking-wide text-sm"></label>
+                <input asp-for="FirstName" placeholder="Enter first name"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                <span asp-validation-for="FirstName" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group mb-4">
-                <label asp-for="LastName" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="LastName" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+            <!-- Last Name -->
+            <div class="mb-6">
+                <label asp-for="LastName" class="block text-gray-300 font-semibold mb-2 uppercase tracking-wide text-sm"></label>
+                <input asp-for="LastName" placeholder="Enter last name"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                <span asp-validation-for="LastName" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group mb-4">
-                <label asp-for="Email" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="Email" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <!-- Email -->
+            <div class="mb-6">
+                <label asp-for="Email" class="block text-gray-300 font-semibold mb-2 uppercase tracking-wide text-sm"></label>
+                <input asp-for="Email" placeholder="Enter email"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                <span asp-validation-for="Email" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group mb-4">
-                <label asp-for="Password" class="control-label text-gray-200 font-medium mb-1"></label>
-                <input asp-for="Password" class="form-control w-full bg-gray-900 text-gray-300 border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <!-- Password -->
+            <div class="mb-8">
+                <label asp-for="Password" class="block text-gray-300 font-semibold mb-2 uppercase tracking-wide text-sm"></label>
+                <input asp-for="Password" placeholder="Enter password"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                <span asp-validation-for="Password" class="text-red-400 text-sm"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary w-full mt-2 p-2 text-lg font-semibold rounded-md transition duration-150 ease-in-out hover:bg-blue-600" />
-            </div>
+            <!-- Create Button -->
+            <button type="submit" id="createBtn" 
+                class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 transition transform hover:-translate-y-1">
+                <span id="createBtnText">Create User</span>
+                <svg id="loadingSpinner" class="animate-spin h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+            </button>
         </form>
+
+        <div class="mt-6 text-center">
+            <a asp-action="Index" class="text-blue-400 hover:text-blue-500 hover:underline transition text-sm">← Back to User List</a>
+        </div>
     </div>
 </div>
 
-<div class="mt-4 text-center">
-    <a asp-action="Index" class="text-blue-400 hover:underline hover:text-blue-500 transition duration-150 ease-in-out">Back to List</a>
+<!-- Modal Notification -->
+<div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-gray-800 text-center text-gray-200 rounded-lg p-8 shadow-2xl w-96 animate-fadeIn">
+        <h2 class="text-2xl font-bold mb-4 text-green-400">User Created Successfully!</h2>
+        <p class="text-gray-400 mb-6">Redirecting to User List page...</p>
+        <button id="closeModalBtn" 
+            class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition">OK</button>
+    </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        const form = document.getElementById("createUserForm");
+        const createBtn = document.getElementById("createBtn");
+        const createBtnText = document.getElementById("createBtnText");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const modal = document.getElementById("successModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Start loading UI
+            createBtn.disabled = true;
+            createBtnText.textContent = "Creating...";
+            loadingSpinner.classList.remove("hidden");
+
+            // Collect form data
+            const formData = new FormData(form);
+
+            fetch('@Url.Action("Create", "User")', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text(); // or response.json() if API returns JSON
+                } else {
+                    throw new Error("Failed to create user");
+                }
+            })
+            .then(() => {
+                // Stop loading
+                createBtnText.textContent = "Create User";
+                loadingSpinner.classList.add("hidden");
+
+                // Show modal
+                modal.classList.remove("hidden");
+
+                // Auto-redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = '@Url.Action("Index", "User")';
+                }, 2000);
+            })
+            .catch(error => {
+                alert("An error occurred: " + error.message);
+                createBtn.disabled = false;
+                createBtnText.textContent = "Create User";
+                loadingSpinner.classList.add("hidden");
+            });
+        });
+
+        closeModalBtn.addEventListener("click", () => {
+            window.location.href = '@Url.Action("Index", "User")';
+        });
+    </script>
+
+    <style>
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @@keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideInUp {
+            animation: slideInUp 1s ease forwards;
+        }
+    </style>
 }
