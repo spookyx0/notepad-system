@@ -231,11 +231,26 @@
         .about-card h1 { font-size: 2rem; }
         .about-card h2 { font-size: 1.3rem; }
     }
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    @@keyframes slideInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slideInUp {
+        animation: slideInUp 1s ease forwards;
+    }
 </style>
 
 <div class="about-wrapper">
     <!-- Main About Card -->
-    <div class="about-card">
+    <div class="about-card animate-slideInUp">
         <img src="/img/ueplogo.png" alt="Quinnreeve C. Lobos" class="profile">
         <h1>Quinnreeve C. Lobos</h1>
         <h2>Fullstack Developer</h2>
@@ -259,7 +274,7 @@
     </div>
 
     <!-- Skills Section -->
-    <div class="section">
+    <div class="section animate-slideInUp">
         <h3>Skills</h3>
         <div class="skills">
             <div class="skill-badge">HTML</div>
@@ -286,7 +301,7 @@
     </div>
 
     <!-- Projects Showcase -->
-    <div class="section">
+    <div class="section animate-slideInUp">
         <h3>Projects Showcase</h3>
         <div class="projects">
             <div class="project-card">
@@ -308,7 +323,7 @@
     </div>
 
     <!-- I Want to Learn Section -->
-    <div class="section">
+    <div class="section animate-slideInUp">
         <h3>I Want to Learn</h3>
         <ul class="learn-list">
             <li>Next.js and Server-Side Rendering</li>
@@ -327,7 +342,7 @@
     </div>
 
     <!-- Call to Action -->
-    <div class="section" style="text-align:center;">
+    <div class="section animate-slideInUp" style="text-align:center;">
         <h3>Interested in collaborating?</h3>
         <p>I'm always open to new opportunities, exciting projects, and networking with fellow developers.</p>
         <a href="mailto:kenkelobos8@gmail.com" class="about-btn">Email Me</a>
